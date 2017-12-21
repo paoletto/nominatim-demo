@@ -1,0 +1,7 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+    <qresource prefix="/">
+        <file>marker.png</file>
+        <file>main.qml</file>
+    </qresource>
+</RCC>
