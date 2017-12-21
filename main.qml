@@ -22,6 +22,8 @@ Window {
         plugin: Plugin {
             name: "osm"
             PluginParameter { name: "osm.useragent"; value: "MyFooBar" }
+            PluginParameter { name: "osm.places.debug.query"; value: true }
+            PluginParameter { name: "osm.places.page_size"; value: 100 }
         }
         center: initialCenter
         zoomLevel: 11
@@ -200,8 +202,14 @@ Window {
             searchModel.update()
         }
 
-        onDataChanged: {
-            console.log("Data changed")
+        onStatusChanged: {
+            if (status != 1) // 1 ready
+                return;
+
+            console.log("Ready")
+            if (count > 0)
+                console.log(data(0, "place").extendedAttributes["requestUrl"].text)
+
         }
     }
 
