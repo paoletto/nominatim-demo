@@ -199,6 +199,8 @@ Window {
 
         function updateSearch()
         {
+            var term = searchModel.searchTerm
+            searchModel.searchTerm = term // this effectively resets the request's context
             searchModel.update()
         }
 
@@ -208,8 +210,15 @@ Window {
 
             console.log("Ready")
             if (count > 0)
-                console.log(data(0, "place").extendedAttributes["requestUrl"].text)
+                console.log("Row ", count - 1, ":", data(count - 1, "place").extendedAttributes["requestUrl"].text)
 
+            if (nextPagesAvailable) {
+                incremental = true
+                nextPage()
+                update()
+            } else {
+                incremental = false
+            }
         }
     }
 
